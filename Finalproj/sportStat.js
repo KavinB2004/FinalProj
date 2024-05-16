@@ -22,7 +22,6 @@ async function fetchStandings() {
 
     try {
         const response = await axios.request(options);
-        console.log('API Response:', JSON.stringify(response.data, null, 2)); // Log to see the full response structure
         return response.data.response; // Adjust to return the correct array based on API structure
     } catch (error) {
         console.error('API Fetch Error:', error);
@@ -182,20 +181,20 @@ app.get('/Yards', async (request, response) => {
 process.stdin.setEncoding('utf8');
 process.stdout.write(`Web server started and running at http://localhost:${portNumber}\n`);
 
-const prompt = 'Stop to shutdown the server: ';
-process.stdout.write(prompt);
-process.stdin.on('readable', function () {
-    const dataInput = process.stdin.read();
-    if (dataInput !== null) {
-        const command = dataInput.trim();
-        if (command === 'stop') {
-            process.stdout.write('Shutting down the server\n');
-            process.exit(0);
-        }
-        process.stdout.write(prompt);
-        process.stdin.resume();
-    }
-});
+// const prompt = 'Stop to shutdown the server: ';
+// process.stdout.write(prompt);
+// process.stdin.on('readable', function () {
+//     const dataInput = process.stdin.read();
+//     if (dataInput !== null) {
+//         const command = dataInput.trim();
+//         if (command === 'stop') {
+//             process.stdout.write('Shutting down the server\n');
+//             process.exit(0);
+//         }
+//         process.stdout.write(prompt);
+//         process.stdin.resume();
+//     }
+// });
 
 
 // const express = require('express');
