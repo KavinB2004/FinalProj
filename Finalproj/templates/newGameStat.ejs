@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Stats</title>
+</head>
+<body>
+    <h1>Add Game Stats 📊</h1>
+    <div style = "border: 1">
+        <form action="http://localhost:<%=portNumber%>/submittedStats" method="post" id="form"  onsubmit = "fun(event)">
+            <fieldset>
+                <label><strong>Name: </strong></label>
+                <input type="text" name="name">
+                <br>
+                <br>
+                <label><strong>TDs: <br></strong></label>
+
+                <input type="number" name="tds">
+                <br>
+                <br>
+                <label><strong>Rush Yards: </strong></label>
+                <input type="number" name="rushyds">
+                <br>
+                <br>
+                <label><strong>Pass Yards: </strong></label>
+                <input type="number" name="passyds">
+                <br>
+                <br>
+                
+                <input type="submit" value="Submit Request">
+            </fieldset>
+        </form>
+    <p class="ball">🏈</p>
+</body>
+
+<a id = "home" href="/">HOME 🏠</a>
+</html>
+
+<style>
+    label{
+        color: white;
+    }
+    fieldset {
+    background-color: rgb(173, 173, 173);
+    box-shadow: 10px 5px 5px rgb(189, 75, 49);
+    border-radius: 4px;
+    border: none;
+    padding: 20px;           
+    width: 80%;              
+    max-width: 500px;        
+    margin: auto;           
+}
+    span{
+        color: white;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        
+    }
+    body {
+    background-color: rgb(33, 33, 33);
+    display: flex;
+    justify-content: center;  
+    align-items: center;     
+    min-height: 100vh;       
+    margin: 0;                
+}
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type="submit"] {
+        background-color: rgb(189, 75, 49);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;        
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    }
+    input[type="submit"]:hover {
+        background-color: rgb(134, 53, 34);
+        
+    }
+   
+
+    h1 {
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: absolute;
+    top: 20vh; 
+    left: 50%;
+    transform: translateX(-50%); 
+    margin-bottom: 20px;
+}
+
+ a#home {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-decoration: none;
+    font-size: 24px; 
+    padding: 10px 20px;
+    background: rgba(189, 75, 49, 0.8);
+    border-radius: 4px;
+}
+
+a#home:hover {
+    background-color: rgb(134, 53, 34);
+}
+    
+
+p.ball {
+    position: absolute;
+    font-size: 50px;
+    animation: moveBall 3s infinite linear;
+    z-index: -1000000;
+}
+@keyframes moveBall {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0) translateX(0);
+    }
+    25% {
+        transform: translate(-50%, -50%) translateY(-10px) translateX(10px);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(0) translateX(0);
+    }
+    75% {
+        transform: translate(-50%, -50%) translateY(10px) translateX(-10px);
+    }
+}
+</style>
+
+<script>
+    function fun(event) {
+        var confirmation = window.confirm("Are you sure you want to submit your stats?");
+        if (!confirmation) {
+            event.preventDefault();
+            }
+        }
+    let pTag = document.querySelector("p.ball");
+
+    let x = Math.floor(Math.random() * window.innerWidth);
+    let y = Math.floor(Math.random() * window.innerHeight);
+    let vx = Math.random() * 2 - 1; 
+    let vy = Math.random() * 2 - 1; 
+    let radius = 20;
+
+    move();
+
+    function move() {
+        if (x + radius >= window.innerWidth || x - radius <= 0) {
+            vx = Math.random() * 2 - 1; 
+            vy = Math.random() * 2 - 1;
+        }
+
+        if (y + radius >= window.innerHeight || y - radius <= 0) {
+            vx = Math.random() * 2 - 1; 
+            vy = Math.random() * 2 - 1;
+        }
+
+        x += vx;
+        y += vy;
+
+        pTag.style.left = x + 'px';
+        pTag.style.top = y + 'px';
+
+        requestAnimationFrame(move); 
+    }
+</script>

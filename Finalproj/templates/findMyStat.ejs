@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application</title>
+</head>
+<body>
+    <p class="ball">🏈</p>
+    <h1>Find Your Stats 🔎</h1>
+    <div class="stage">
+        <figure class="ball"></figure>
+      </div>
+    <div id="con">
+        <form action="http://localhost:<%=portNumber%>/myStat" method="post"  onsubmit = "fun(event)">
+            <span><b>Enter Name:</b></span>
+            <input type="text" name="name">
+            <br> <br>
+            <input type="submit" value= "Submit Request">
+        </form>
+    </div>
+    <br>
+    <a id = "home" href="/">HOME 🏠</a>
+</body>
+</html>
+
+<style>
+
+
+    span{
+        color: white;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        
+    }
+    body {
+    background-color: rgb(33, 33, 33);
+    display: flex;
+    justify-content: center;  
+    align-items: center;     
+    min-height: 100vh;       
+    margin: 0;                
+}
+
+form {
+    background: rgb(173, 173, 173);
+    padding: 40px;
+    border-radius: 8px;
+    width: 300px; 
+    transform: translate(-50%, -50%); 
+    position: absolute;      
+    top: 50%;                 
+    left: 50%; 
+    box-shadow: 10px 5px 5px rgb(189, 75, 49)          
+}
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type="submit"] {
+        background-color: rgb(189, 75, 49);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;        
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    }
+    input[type="submit"]:hover {
+        background-color: rgb(134, 53, 34);
+        
+    }
+   
+
+    h1{
+        color: white;
+        margin-bottom: 400px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        transform: translate(-50%, -50%); 
+        position: absolute;      
+        top: 30%;                 
+        left: 50%;  
+
+    }
+
+ a#home {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-decoration: none;
+    font-size: 24px; 
+    padding: 10px 20px;
+    background: rgba(189, 75, 49, 0.8);
+    border-radius: 4px;
+}
+
+a#home:hover {
+    background-color: rgb(134, 53, 34);
+}
+    
+
+
+p.ball {
+    z-index: -1000000;
+    position: absolute;
+    font-size: 50px;
+    animation: moveBall 3s infinite linear;
+}
+@keyframes moveBall {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0) translateX(0);
+    }
+    25% {
+        transform: translate(-50%, -50%) translateY(-10px) translateX(10px);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(0) translateX(0);
+    }
+    75% {
+        transform: translate(-50%, -50%) translateY(10px) translateX(-10px);
+    }
+}
+</style>
+
+<script>
+        function fun(event) {
+            var confirmation = window.confirm("Are you sure you this is your name?");
+            if (!confirmation) {
+                event.preventDefault();
+            }
+        }
+    let pTag = document.querySelector("p.ball");
+
+    let x = Math.floor(Math.random() * window.innerWidth);
+    let y = Math.floor(Math.random() * window.innerHeight);
+    let vx = Math.random() * 2 - 1; 
+    let vy = Math.random() * 2 - 1; 
+    let radius = 20;
+
+    move();
+
+    function move() {
+        if (x + radius >= window.innerWidth || x - radius <= 0) {
+            vx = Math.random() * 2 - 1; 
+            vy = Math.random() * 2 - 1;
+        }
+
+        if (y + radius >= window.innerHeight || y - radius <= 0) {
+            vx = Math.random() * 2 - 1; 
+            vy = Math.random() * 2 - 1;
+        }
+
+        x += vx;
+        y += vy;
+
+        pTag.style.left = x + 'px';
+        pTag.style.top = y + 'px';
+
+        requestAnimationFrame(move); 
+    }
+</script>
+
+   

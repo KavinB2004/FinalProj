@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TD Leader</title>
+</head>
+
+<div style="border: 1"> 
+<fieldset>
+
+<body>
+    <p class="ball">🏈</p>
+    <h1>Touchdown Leaderboard</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Ranking 🏆</th>
+                <th>Name 👤</th>
+                <th>TDS 🏈</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%-table%>
+        </tbody>
+    </table>
+</fieldset>
+</div>
+    <a id="home" href="/">HOME 🏠</a>
+</body>
+</html>
+
+<style>
+    fieldset {
+        background-color: rgb(173, 173, 173);
+        box-shadow: 10px 5px 5px rgb(189, 75, 49);
+        border-radius: 4px;
+        border: none;
+        padding: 20px;
+        width: 80%;
+        max-width: 500px;
+        margin: auto;
+        color: white;
+    }
+
+    h1 {
+        color: white;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    text-align: center; 
+    width: 100%; 
+    }
+
+    body {
+        background-color: rgb(33, 33, 33);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; 
+        margin-top: 20px; 
+    }
+
+    th, td {
+        border: 1px solid #ddd; 
+        padding: 8px; 
+        text-align: left;
+    }
+
+    th {
+        background-color: rgba(189, 75, 49, 0.8); 
+        color: white; 
+    }
+
+    td{
+        color: rgba(189, 75, 49, 0.8);
+    }
+
+    tbody {
+        background-color: white;
+    }
+
+    tr:hover {
+        background-color: rgb(230, 230, 230);
+    }
+
+    a#home {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+        padding: 10px 20px;
+        background: rgba(189, 75, 49, 0.8);
+        border-radius: 4px;
+    }
+
+    a#home:hover {
+        background-color: rgb(134, 53, 34);
+    }
+    p.ball {
+    z-index: -1000000;
+    position: absolute;
+    font-size: 50px;
+    animation: moveBall 3s infinite linear;
+}
+@keyframes moveBall {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0) translateX(0);
+    }
+    25% {
+        transform: translate(-50%, -50%) translateY(-10px) translateX(10px);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(0) translateX(0);
+    }
+    75% {
+        transform: translate(-50%, -50%) translateY(10px) translateX(-10px);
+    }
+}
+</style>
+
+<script>
+
+    let pTag = document.querySelector("p.ball");
+
+    let x = Math.floor(Math.random() * window.innerWidth);
+    let y = Math.floor(Math.random() * window.innerHeight);
+    let vx = Math.random() * 2 - 1; 
+    let vy = Math.random() * 2 - 1; 
+    let radius = 20;
+
+    move();
+
+    function move() {
+        if (x + radius >= window.innerWidth || x - radius <= 0) {
+            vx = Math.random() * 2 - 1; 
+            vy = Math.random() * 2 - 1;
+        }
+
+        if (y + radius >= window.innerHeight || y - radius <= 0) {
+            vx = Math.random() * 2 - 1; 
+            vy = Math.random() * 2 - 1;
+        }
+
+        x += vx;
+        y += vy;
+
+        pTag.style.left = x + 'px';
+        pTag.style.top = y + 'px';
+
+        requestAnimationFrame(move); 
+    }
+</script>
